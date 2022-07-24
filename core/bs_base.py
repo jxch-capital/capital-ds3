@@ -11,6 +11,18 @@ def rs_to_dataframe(rs):
 
 
 @lru_cache(maxsize=10000)
+def query_stock_basic_by_code(code):
+    rs = bs.query_stock_basic(code=code)
+    return rs_to_dataframe(rs)
+
+
+@lru_cache(maxsize=10000)
+def query_stock_basic_by_name(name):
+    rs = bs.query_stock_basic(code_name=name)
+    return rs_to_dataframe(rs)
+
+
+@lru_cache(maxsize=10000)
 def query_name_by_code(code):
     rs = bs.query_stock_basic(code=code)
     df = rs_to_dataframe(rs)
