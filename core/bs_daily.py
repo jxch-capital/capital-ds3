@@ -17,6 +17,8 @@ def query_daily_by_code(code, start_date_str, end_date_str):
                                       start_date=start_date_str, end_date=end_date_str, frequency="d",
                                       adjustflag="3")
     df = bs_base.rs_to_dataframe(rs)
+    if df.empty is True:
+        raise RuntimeWarning("查询结果是空的")
     df["open"] = pd.to_numeric(df["open"])
     df["high"] = pd.to_numeric(df["high"])
     df["low"] = pd.to_numeric(df["low"])
