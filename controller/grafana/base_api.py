@@ -1,7 +1,5 @@
-import json
 import logging
 
-import baostock as bs
 from flask import Blueprint
 from flask import request
 
@@ -20,12 +18,10 @@ def grafana_root():
 @a_base_api.before_request
 def before_request():
     logging.info(f"----> request: {request}")
-    bs.login()
 
 
 @a_daily_index_api.after_request
 @a_base_api.after_request
 def after_request(resp):
-    bs.logout()
     logging.info(f"<---- request: {request}")
     return resp

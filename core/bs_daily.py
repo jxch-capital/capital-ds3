@@ -7,8 +7,11 @@ import logging
 import core.bs_base as bs_base
 import core.k_index as k_index
 
+from core.bs_support import login
+
 
 @lru_cache(maxsize=10000, typed=True)
+@login
 def query_daily_by_code(code, start_date_str, end_date_str):
     logging.info(f"查询{code}, start: {start_date_str}, end: {end_date_str}")
     rs = bs.query_history_k_data_plus(code,
