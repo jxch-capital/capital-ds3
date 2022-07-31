@@ -10,5 +10,6 @@ from utils.log_utils import log
 def query_daily_by_code(code, start, end):
     df = pdr.get_data_stooq(code, start, end)
     df = k_index.stockstats_default(df)
+    df['date'] = df['Date']
     return df
 
