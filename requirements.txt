@@ -1,3 +1,4 @@
+APScheduler==3.9.1
 baostock==0.8.8
 certifi==2022.6.15
 charset-normalizer==2.1.0
@@ -17,9 +18,13 @@ pre-request==2.1.5
 python-dateutil==2.8.2
 python-dotenv==0.20.0
 pytz==2022.1
+pytz-deprecation-shim==0.1.0.post0
 requests==2.28.1
+schedule==1.1.0
 six==1.16.0
 stockstats==0.4.1
+tzdata==2022.1
+tzlocal==4.2
 urllib3==1.26.11
 Werkzeug==2.2.1
 yfinance==0.1.74
