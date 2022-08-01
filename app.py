@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'Hello Capital DS3!'
 
 
 if __name__ == '__main__':
