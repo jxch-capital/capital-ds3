@@ -2,6 +2,7 @@ import baostock as bs
 import pandas as pd
 from functools import lru_cache
 from core.bs_support import login
+from utils.scheduler_utils import scheduler
 
 
 def rs_to_dataframe(rs):
@@ -45,3 +46,19 @@ def query_code_by_name(name):
         return df['code'][0]
     else:
         raise TypeError(f'找不到{name}对应的code, 搜索结果:{df}')
+
+
+@lru_cache(maxsize=1)
+@login
+def query_stock_industry():
+    rs = bs.query_stock_industry()
+    return rs_to_dataframe(rs)
+
+
+@scheduler.scheduled_job('cron', id='bs_base:cache_clear', day_of_week='mon')
+def cache_clear():
+    query_stock_basic_by_code.cache_clear()
+    query_stock_basic_by_name.cache_clear()
+    query_name_by_code.cache_clear()
+    query_code_by_name.cache_clear()
+    query_stock_industry.cache_clear()

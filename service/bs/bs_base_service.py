@@ -15,3 +15,5 @@ def codes_names_json(codes, names):
     return json.dumps({'codes': codes, 'names': names}, ensure_ascii=False)
 
 
+def query_stock_industry():
+    return bs_base.query_stock_industry().to_dict('records')

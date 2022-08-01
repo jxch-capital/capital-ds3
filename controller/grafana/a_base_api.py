@@ -35,3 +35,8 @@ def stock_basic_by_code():
 def stock_basic_by_name():
     name = request.args['name']
     return bs_base.query_stock_basic_by_name(name).to_json(orient='records', force_ascii=False)
+
+
+@a_base_api.route("/grafana/stock_industry_sw", methods=["GET"])
+def stock_industry_sw():
+    return bs_base.query_stock_industry().to_json(orient='records', force_ascii=False)
