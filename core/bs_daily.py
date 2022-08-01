@@ -9,6 +9,7 @@ import core.k_index as k_index
 
 from core.bs_support import login
 from utils.log_utils import log
+from utils.scheduler_utils import scheduler
 
 
 @lru_cache(maxsize=10000, typed=True)
@@ -41,3 +42,8 @@ def query_daily_by_code(code, start_date_str, end_date_str):
     df = k_index.stockstats_default(df)
     df['code'] = codes
     return df
+
+
+@scheduler.scheduled_job('cron', id='bs_daily:cache_clear', day_of_week='mon-fri', hour=0, minute=0)
+def cache_clear():
+    query_daily_by_code.cache_clear()

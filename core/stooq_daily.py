@@ -3,6 +3,7 @@ from functools import lru_cache
 
 from core import k_index
 from utils.log_utils import log
+from utils.scheduler_utils import scheduler
 
 
 @lru_cache(maxsize=10000, typed=True)
@@ -13,3 +14,7 @@ def query_daily_by_code(code, start, end):
     df['date'] = df['Date']
     return df
 
+
+@scheduler.scheduled_job('cron', id='stooq_daily:cache_clear', day_of_week='mon-fri', hour=0, minute=0)
+def cache_clear():
+    query_daily_by_code.cache_clear()
