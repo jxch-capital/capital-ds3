@@ -3,6 +3,8 @@ import pandas as pd
 from functools import lru_cache
 from core.bs_support import login
 from utils.scheduler_utils import scheduler
+import logging
+from config import attr_config as attr
 
 
 def rs_to_dataframe(rs):
@@ -34,7 +36,8 @@ def query_name_by_code(code):
     if df.empty is False:
         return df['code_name'][0]
     else:
-        raise TypeError(f'找不到{code}对应的code_name, 搜索结果:{df}')
+        logging.info(f'找不到{code}对应的code_name, 搜索结果:{df}')
+        return attr.empty
 
 
 @lru_cache(maxsize=10000)
@@ -45,7 +48,8 @@ def query_code_by_name(name):
     if df.empty is False:
         return df['code'][0]
     else:
-        raise TypeError(f'找不到{name}对应的code, 搜索结果:{df}')
+        logging.info(f'找不到{name}对应的code, 搜索结果:{df}')
+        return attr.empty
 
 
 @lru_cache(maxsize=1)
